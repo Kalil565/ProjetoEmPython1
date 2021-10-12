@@ -16,6 +16,10 @@ def telaDeLogin():
     if button == 'Cadastrar':
         janelaDeLogin.close()
         telaDeCadastro()
+    if button == 'Logar':
+        janelaDeLogin.close()
+        janelaLogada()
+
 
 def telaDeCadastro():
     sg.theme('Black')
@@ -31,7 +35,26 @@ def telaDeCadastro():
 
     button, values = janelaDeCadastro.Read()
 
+    if button == 'voltarLogin':
+        janelaDeCadastro.close()
+        telaDeLogin()
 
+def janelaLogada():
+    sg.theme('Black')
 
+    logado = [
+        [sg.Text("Usuário: ", size= (10, 5)), sg.Text(" ", size= (10, 5))],
+        [sg.Button("Alterar", size= (7, 0))],
+        [sg.Button("Sair", size= (7, 0), key= 'deslogar')]
+
+    ]
+
+    janelaDoUsuario = sg.Window("Usuário", layout= logado, size= (400, 600))
+
+    button, values = janelaDoUsuario.Read()
+
+    if button == 'deslogar':
+        janelaDoUsuario.close()
+        telaDeLogin()
 
 telaDeLogin()
