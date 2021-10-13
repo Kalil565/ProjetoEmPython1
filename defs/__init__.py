@@ -6,7 +6,6 @@ cursor.execute('SELECT * FROM teste')
 dados = cursor.fetchall()
 
 
-
 def login(login, senha):
     for pos in range(0, len(dados)):
         info = dados[pos]
@@ -16,9 +15,14 @@ def login(login, senha):
     else:
         return False
 
+
 def cadastrar(user= '', senha= ''):
-    cursor.execute('INSERT INTO teste VALUES("'+user+'", "'+senha+'")')
-    usuario.commit()
+    if user != '':
+        if senha != '':
+            cursor.execute('INSERT INTO teste VALUES("'+user+'", "'+senha+'")')
+            usuario.commit()
+            return True
+
 
 def cadastroDados(dadosUser= list()):
     if len(dadosUser) == 9:
@@ -26,3 +30,5 @@ def cadastroDados(dadosUser= list()):
         ' "'+dadosUser[3]+'", "'+dadosUser[4]+'", "'+dadosUser[5]+'", "'+dadosUser[6]+'", "'+dadosUser[7]+'", "'+dadosUser[8]+'")')
         usuario.commit()
         return True
+        
+    

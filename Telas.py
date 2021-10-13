@@ -36,6 +36,7 @@ def telaDeLogin():
             janelaDeLogin.close()
             telaDeInfo()
         else:
+            janelaDeLogin.close()
             sg.popup('Erro')
             telaDeLogin()
     
@@ -57,15 +58,19 @@ def telaDeCadastro():
 
     user= values['usuarioCadastrar']
     senha= values['senhaCadastrar']
+    usuario= defs.cadastrar(user, senha)
 
     if button == 'voltarLogin':
         janelaDeCadastro.close()
         telaDeLogin()
     elif button == 'continuarCadastro':
-        defs.cadastrar(user, senha)
-        janelaDeCadastro.close()
-        inserirInfo()
-
+        if usuario == True:
+            janelaDeCadastro.close()
+            inserirInfo()
+        else:
+            janelaDeCadastro.close()
+            sg.popup("Erro")
+            telaDeCadastro()
 
 #janela para inserir os dados do usuario que está se cadastrando
 def inserirInfo():
@@ -121,7 +126,9 @@ def inserirInfo():
         else:
             sg.popup("Erro")
             inserirInfo()
-
+    elif button == 'voltarCadastro':
+        inserirDados.close()
+        telaDeCadastro()
 
 
 
@@ -129,8 +136,10 @@ def inserirInfo():
 def telaDeInfo():
     sg.theme('DarkBrown1')
 
+    
+
     logado = [
-        [sg.Text('Usuário: ', size= (15)), sg.Text(' ')],
+        [sg.Text('Usuário: ', size= (15)), sg.Text('')],
         [sg.Text('Idade: ', size= (15)), sg.Text('')],
         [sg.Text('Endereço: ', size= (15)), sg.Text('')],
         [sg.Text('Email de Contato: ', size= (15)), sg.Text('')],
