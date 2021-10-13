@@ -1,11 +1,14 @@
 import PySimpleGUI as sg
 import sqlite3
+import defs
 
-dados = sqlite3.connect('informacaoDoUsuario.db')
+
+dados = sqlite3.connect('teste.db')
 cursor = dados.cursor()
 
 """ cursor.execute('CREATE TABLE Usuarios("Usuario" TEXT, "Senha" TEXT, "Nome" TEXT, "Idade" INTEGER, "Endereço" TEXT,'
     '"Email" TEXT, "Trabalho" TEXT, "Estudos" TEXT, "Cursado" TEXT, "Serviço" TEXT)') """
+
 
 #janela inicial
 def telaDeLogin():
@@ -21,14 +24,21 @@ def telaDeLogin():
 
     button, values = janelaDeLogin.Read()
     
+    user = values['usuarioLogado']
+    senha = values['senhaLogado']
+
+    
     if button == 'Cadastrar':
         janelaDeLogin.close()
         telaDeCadastro()
     if button == 'Logar':
-        janelaDeLogin.close()
-        telaDeInfo()
-
-
+        if defs.login(user, senha):
+            janelaDeLogin.close()
+            telaDeInfo()
+        else:
+            sg.popup('Erro')
+            telaDeLogin()
+    
 
 #janela quando for cadastrar
 def telaDeCadastro():
@@ -45,10 +55,14 @@ def telaDeCadastro():
 
     button, values = janelaDeCadastro.Read()
 
+    user= values['usuarioCadastrar']
+    senha= values['senhaCadastrar']
+
     if button == 'voltarLogin':
         janelaDeCadastro.close()
         telaDeLogin()
     elif button == 'continuarCadastro':
+        defs.cadastrar(user, senha)
         janelaDeCadastro.close()
         inserirInfo()
 
