@@ -15,6 +15,18 @@ def login(login, senha):
     else:
         return False
 
+def infoShow(login = 'kalil565'):
+    infos = []
+    for posUser in range(0, len(dados)):
+        user = dados[posUser]
+        if login == user[0]:
+            cursor.execute('SELECT * FROM dados')
+            userInfo= cursor.fetchall()
+            for posInfo in range(0, len(userInfo)):
+                if posInfo == posUser:
+                    infos = userInfo[posInfo]
+                    return infos
+
 
 def cadastrar(user= '', senha= ''):
     if user != '':

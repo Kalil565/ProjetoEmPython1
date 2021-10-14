@@ -1,3 +1,4 @@
+
 import PySimpleGUI as sg
 import sqlite3
 import defs
@@ -34,7 +35,7 @@ def telaDeLogin():
     elif button == 'Logar':
         if defs.login(user, senha):
             janelaDeLogin.close()
-            telaDeInfo()
+            telaDeInfo(user)
         else:
             janelaDeLogin.close()
             sg.popup('Erro')
@@ -133,25 +134,28 @@ def inserirInfo():
 
 
 #Janela quando logar
-def telaDeInfo():
+def telaDeInfo(infos):
     sg.theme('DarkBrown1')
 
-    
+
+    info = defs.infoShow(infos)
 
     logado = [
-        [sg.Text('Usuário: ', size= (15)), sg.Text('')],
-        [sg.Text('Idade: ', size= (15)), sg.Text('')],
-        [sg.Text('Endereço: ', size= (15)), sg.Text('')],
-        [sg.Text('Email de Contato: ', size= (15)), sg.Text('')],
-        [sg.Text('Telefone: ', size= (15)), sg.Text('')],
-        [sg.Text('Trabalho: ', size= (15)), sg.Text('')],
-        [sg.Text('Estudos: ', size= (15)), sg.Text('')],
-        [sg.Text('Cursado: ', size= (15)), sg.Text('')],
-        [sg.Text('Tipo de serviço contratado: ', size= (25)), sg.Text()],
+        [sg.Text('Usuário: '), sg.Text(f'{info[0].capitalize()}', background_color= 'Black', border_width= '3px', size= (60, 0))],
+        [sg.Text('Idade: '), sg.Text(f'{info[1]}', background_color= 'Black', border_width= '3px', size= (60, 0))],
+        [sg.Text('Endereço: '), sg.Text(f'{info[2].capitalize()}', background_color= 'Black', border_width= '3px', size= (60, 0))],
+        [sg.Text('Email de Contato: '), sg.Text(f'{info[3]}', background_color= 'Black', border_width= '3px', size= (60, 0))],
+        [sg.Text('Telefone: '), sg.Text(f'{info[4]}', background_color= 'Black', border_width= '3px', size= (60, 0))],
+        [sg.Text('Trabalho: '), sg.Text(f'{info[5]}', background_color= 'Black', border_width= '3px', size= (60, 0))],
+        [sg.Text('Estudos: '), sg.Text(f'{info[6]}', background_color= 'Black', border_width= '3px', size= (60, 0))],
+        [sg.Text('Cursado: '), sg.Text(f'{info[7]}', background_color= 'Black', border_width= '3px', size= (60, 0))],
+        [sg.Text('Tipo de serviço contratado: ', size= (25)), sg.Text(f'{info[8]}', background_color= 'Black', border_width= '3px', size= (60, 0))],
+        [sg.Text('')],
         [sg.Button('Alterar', size= (7, 0), key= 'alterar'), sg.Button('Sair', size= (7, 0), key= 'deslogar')]
-    ]
+    ] 
+    del info
 
-    janelaDoUsuario = sg.Window("Usuário", layout= logado, size= (550, 475))
+    janelaDoUsuario = sg.Window("Usuário", layout=logado, size= (550, 475))
 
     button, values = janelaDoUsuario.Read()
 
@@ -197,4 +201,4 @@ def alteracaoDeInfo():
         telaDeInfo()
 
 
-telaDeLogin()
+telaDeInfo('kalil565')
