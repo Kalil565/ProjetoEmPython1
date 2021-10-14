@@ -137,8 +137,9 @@ def inserirInfo():
 def telaDeInfo(infos):
     sg.theme('DarkBrown1')
 
-
+    
     info = defs.infoShow(infos)
+    nome = info[0]
 
     logado = [
         [sg.Text('Usuário: '), sg.Text(f'{info[0].capitalize()}', background_color= 'Black', border_width= '3px', size= (60, 0))],
@@ -149,7 +150,7 @@ def telaDeInfo(infos):
         [sg.Text('Trabalho: '), sg.Text(f'{info[5]}', background_color= 'Black', border_width= '3px', size= (60, 0))],
         [sg.Text('Estudos: '), sg.Text(f'{info[6]}', background_color= 'Black', border_width= '3px', size= (60, 0))],
         [sg.Text('Cursado: '), sg.Text(f'{info[7]}', background_color= 'Black', border_width= '3px', size= (60, 0))],
-        [sg.Text('Tipo de serviço contratado: ', size= (25)), sg.Text(f'{info[8]}', background_color= 'Black', border_width= '3px', size= (60, 0))],
+        [sg.Text('Tipo de serviço contratado: ', size= (25)), sg.Text(f'{info[7]}', background_color= 'Black', border_width= '3px', size= (60, 0))],
         [sg.Text('')],
         [sg.Button('Alterar', size= (7, 0), key= 'alterar'), sg.Button('Sair', size= (7, 0), key= 'deslogar')]
     ] 
@@ -164,17 +165,19 @@ def telaDeInfo(infos):
         telaDeLogin()
     elif button == 'alterar':
         janelaDoUsuario.close()
-        alteracaoDeInfo()
+        alteracaoDeInfo(infos, nome)
 
 
-def alteracaoDeInfo():
+def alteracaoDeInfo(login, nome):
     sg.theme('DarkBrown1')
+
+    loginUser = login
 
     servico= ['Programador Front-End', 'Programador Back-End', 'Programador FullStack', 'Desenvolvedor web', 'Desenvolver de Hardware']
 
     info = [
-        [sg.Text('Nome Do Usuário; '), sg.Input(size= (80, 0), key= 'nomeDoUsuario')],
-        [sg.Text('Idade; '), sg.Combo(values= list(range(1, 101)), key= 'idade', size=(5, 10), default_value= 0)],
+        [sg.Text('Nome Do Usuário; '), sg.Text(f'{nome}')],
+        [sg.Text('Idade; '), sg.Combo(values= list(range(1, 101)), key= 'idade', size=(5, 10))],
         [sg.Text('Endereço; '), sg.Input(size= (80, 0), key= 'endereco')],
         [sg.Text('')],
         [sg.Text("E-mail; "), sg.Input(size= (80, 0), key= 'email')],
@@ -184,7 +187,7 @@ def alteracaoDeInfo():
         [sg.Text('Você ainda Estuda? '), sg.Combo(['Sim', 'Não'], key= 'estudos', size= (5, 0))],
         [sg.Text('Você é cursado? '), sg.Input(size= (80, 15), key= 'cursado')],
         [sg.Text('')],
-        [sg.Text('Para qual tipo de serviço gostaria de alterar? ', size= (25)), sg.Combo(servico, size= (20, 5), default_value= 'Nenhum', key= 'tipoDeServico')],
+        [sg.Text('Para qual tipo de serviço gostaria de alterar? ', size= (25)), sg.Combo(servico, size= (20, 5), key= 'tipoDeServico')],
         [sg.Text('')],
         [sg.Button('Cancelar', size= (7, 0), key= 'cancelar'), sg.Text(' ' * 65), sg.Button('Confirmar', size= (7, 0), key= 'confirmar')]    
     ]
@@ -193,12 +196,27 @@ def alteracaoDeInfo():
 
     button, values = janelaInfo.Read()
 
+    user= []
+    
+    user.append(nome)
+    user.append(str(values['idade']))
+    user.append(str(values['endereco']))
+    user.append(str(values['email']))
+    user.append(str(values['telefone']))
+    user.append(str(values['usuarioTrabalha']))
+    user.append(str(values['estudos']))
+    user.append(str(values['cursado']))
+    user.append(str(values['tipoDeServico']))
+
+
     if button == 'confirmar':
         janelaInfo.close()
-        telaDeInfo()
+        defs.alterar(user)
+        sg.popup('Alteração Feita com sucesso')
+        telaDeInfo(loginUser)
     elif button == 'cancelar':
         janelaInfo.close()
-        telaDeInfo()
+        telaDeInfo(loginUser)
 
 
-telaDeInfo('kalil565')
+telaDeLogin()
