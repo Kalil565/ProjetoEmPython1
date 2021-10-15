@@ -126,7 +126,9 @@ def inserirInfo():
             telaDeLogin()
         else:
             sg.popup("Erro")
+            iserirDados.close()
             inserirInfo()
+
     elif button == 'voltarCadastro':
         inserirDados.close()
         telaDeCadastro()
@@ -196,22 +198,22 @@ def alteracaoDeInfo(login, nome):
 
     button, values = janelaInfo.Read()
 
-    user= []
+    usuario= []
     
-    user.append(nome)
-    user.append(str(values['idade']))
-    user.append(str(values['endereco']))
-    user.append(str(values['email']))
-    user.append(str(values['telefone']))
-    user.append(str(values['usuarioTrabalha']))
-    user.append(str(values['estudos']))
-    user.append(str(values['cursado']))
-    user.append(str(values['tipoDeServico']))
+    usuario.append(nome)
+    usuario.append(str(values['idade']))
+    usuario.append(str(values['endereco']))
+    usuario.append(str(values['email']))
+    usuario.append(str(values['telefone']))
+    usuario.append(str(values['usuarioTrabalha']))
+    usuario.append(str(values['estudos']))
+    usuario.append(str(values['cursado']))
+    usuario.append(str(values['tipoDeServico']))
 
 
     if button == 'confirmar':
         janelaInfo.close()
-        defs.alterar(user)
+        defs.alterar(usuario)
         sg.popup('Alteração Feita com sucesso')
         telaDeInfo(loginUser)
     elif button == 'cancelar':

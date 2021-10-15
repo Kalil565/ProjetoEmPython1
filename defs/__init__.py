@@ -43,33 +43,38 @@ def cadastroDados(dadosUser= list()):
         usuario.commit()
         return True
         
-def alterar(dadosUser= list()):
+def alterar(dadosUser= list(1, 2, 3, 4, 5, 6, 7, 8, 9)):
     for pos in range(0, len(dados)):
         user= dados[pos]
         for posUser in range(0, len(user)):
-            if user[posUser][0] == dadosUser[0]:
-                if user[posUser][1] != dadosUser[1] != '':
-                    cursor.execute('UPDATE dados SET Idade= "'+dadosUser[1]+'" WHERE Nome = "'+dadosUser[0]+'"')
-                    usuario.commit()
-                if user[posUser][2] != dadosUser[2] != '':
-                    cursor.execute('UPDATE dados SET Endereço= "'+dadosUser[2]+'" WHERE Nome = "'+dadosUser[0]+'"')
-                    usuario.commit()
-                if user[posUser][3] != dadosUser[3] != '':
-                    cursor.execute('UPDATE dados SET Email= "'+dadosUser[3]+'" WHERE Nome = "'+dadosUser[0]+'"')
-                    usuario.commit()
-                if user[posUser][4] != dadosUser[4] != '':
-                    cursor.execute('UPDATE dados SET Telefone= "'+dadosUser[4]+'" WHERE Nome = "'+dadosUser[0]+'"')
-                    usuario.commit()
-                if user[posUser][5] != dadosUser[5] != '':
-                    cursor.execute('UPDATE dados SET Trabalho= "'+dadosUser[5]+'" WHERE Nome = "'+dadosUser[0]+'"')
-                    usuario.commit()
-                if user[posUser][6] != dadosUser[6] != '':
-                    cursor.execute('UPDATE dados SET Estudo= "'+dadosUser[6]+'" WHERE Nome = "'+dadosUser[0]+'"')
-                    usuario.commit()
-                if user[posUser][7] != dadosUser[7] != '':  
-                    cursor.execute('UPDATE dados SET Cursado= "'+dadosUser[7]+'" WHERE Nome = "'+dadosUser[0]+'"')
-                    usuario.commit()
-                if user[posUser][8] != dadosUser[8] != '':  
-                    cursor.execute('UPDATE dados SET Serviço= "'+dadosUser[8]+'" WHERE Nome = "'+dadosUser[0]+'"')
-                    usuario.commit()
-                return True
+            try:    
+                if user[posUser][0] == dadosUser[0]:
+                    if user[posUser][1] != dadosUser[1] != '':
+                        cursor.execute('UPDATE dados SET Idade= "'+dadosUser[1]+'" WHERE Nome = "'+dadosUser[0]+'"')
+                        usuario.commit()
+                    if user[posUser][2] != dadosUser[2] != '':
+                        cursor.execute('UPDATE dados SET Endereço= "'+dadosUser[2]+'" WHERE Nome = "'+dadosUser[0]+'"')
+                        usuario.commit()
+                    if user[posUser][3] != dadosUser[3] != '':
+                        cursor.execute('UPDATE dados SET Email= "'+dadosUser[3]+'" WHERE Nome = "'+dadosUser[0]+'"')
+                        usuario.commit()
+                    if user[posUser][4] != dadosUser[4] != '':
+                        cursor.execute('UPDATE dados SET Telefone= "'+dadosUser[4]+'" WHERE Nome = "'+dadosUser[0]+'"')
+                        usuario.commit()
+                    if user[posUser][5] != dadosUser[5] != '':
+                        cursor.execute('UPDATE dados SET Trabalho= "'+dadosUser[5]+'" WHERE Nome = "'+dadosUser[0]+'"')
+                        usuario.commit()
+                    if user[posUser][6] != dadosUser[6] != '':
+                        cursor.execute('UPDATE dados SET Estudo= "'+dadosUser[6]+'" WHERE Nome = "'+dadosUser[0]+'"')
+                        usuario.commit()
+                    if user[posUser][7] != dadosUser[7] != '':  
+                        cursor.execute('UPDATE dados SET Cursado= "'+dadosUser[7]+'" WHERE Nome = "'+dadosUser[0]+'"')
+                        usuario.commit()
+                    if user[posUser][8] != dadosUser[8] != '':  
+                        cursor.execute('UPDATE dados SET Serviço= "'+dadosUser[8]+'" WHERE Nome = "'+dadosUser[0]+'"')
+                        usuario.commit()
+                    print("Alteração feita com sucesso")
+                    return True
+                    
+            except:
+                print("Nao foi possivel fazer a alteracao")

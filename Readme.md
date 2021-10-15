@@ -1,0 +1,1 @@
+O Objetivo desse projeto, era fazer um mini CRM, porém por falta de conhecimento, não consegui completar, então resolvi deixar incompleto e futuramente voltar para esse projeto, só que fazendo ele desde o início podendo ter outras bibliotecas e variação mais facilitadas nos codigos, espero que gostem desse primeiro projeto incompleto<0^0>
